@@ -1,7 +1,7 @@
 const {Router}=require("express");
 const rutasVentas=Router();
-const ctrVentas=require("../controllers/user.controller");
-const autorizedHuesped=require("../auth/auth.huesped");
+const ctrVentas=require("../controllers/ventas.controller");
+const autorizedHuesped=require("../auth/auth");
 const multer=require("multer");
 const fecha=Date.now();
 

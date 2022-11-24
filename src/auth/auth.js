@@ -1,4 +1,4 @@
-const User = require("../models/Huesped");
+const User = require("../models/clientes");
 const jwt = require("jsonwebtoken");
 
 const autorizedHuesped = async (req, res, next) => {

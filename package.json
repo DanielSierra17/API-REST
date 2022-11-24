@@ -9,12 +9,10 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "Daniel Fernando Sierra Betancourt",
+  "author": "Daniel Fernando Sierra Betancourt, Luis Sneyder Silva Albarracín",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "ejs": "^3.1.8",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.3",
