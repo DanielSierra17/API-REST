@@ -1,7 +1,7 @@
 const User = require("../models/celulares");
 const jwt = require("jsonwebtoken");
 
-const autorizedHuesped = async (req, res, next) => {
+const autorizedCelular = async (req, res, next) => {
     const strToken = req.headers.authorization;
     if (!strToken) {
         return res.json({ msj: "No se encontró el token" });
@@ -10,12 +10,12 @@ const autorizedHuesped = async (req, res, next) => {
     console.log(token);
     const palabra = "hotelia-kuepa";
     const key = jwt.verify(token, palabra);
-    const huesped = await User.findById(key._id);
-    if (!huesped) {
+    const celular = await User.findById(key._id);
+    if (!celular) {
         return res.json({ msj: "No se encontró el celular" });
     }
     console.log(key);
     next();
 }
 
-module.exports = autorizedHuesped;
+module.exports = autorizedCelular;
