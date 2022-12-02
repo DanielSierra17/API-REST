@@ -1,29 +1,110 @@
 ###
-POST http://localhost:3000/api/ventas HTTP/1.1
+GET http://localhost:3000/Celulares/clientes HTTP/1.1
+
+###
+GET http://localhost:3000/Celulares/clientes/7458612100 HTTP/1.1
+
+###
+POST http://localhost:3000/Celulares/clientes HTTP/1.1
 Content-Type: application/json
 
 {
-    "tamaño": "grande",
-    "total": 100000,
-    "cantidad de productos": 15,
-    "mensaje": "gracias por su compra vuelva pronto"
+    {
+        "_id": 1014756932,
+        "Tipo": "Cedula Ciudadania",
+        "Nombre": "Maria Alejandra",
+        "Apellido": "Rivera Suarez",
+        "Edad": 21,
+        "Sexo": "Femenino",
+        "Correo": "alejamar21@outlook.com",
+        "Telefono": 3112147589,
+        "Direccion": "Cra 4 C 2 Ac 32"
+    }
 }
 
 ###
-GET http://localhost:3000/api/ventas HTTP/1.1
-
-###
-GET http://localhost:3000/api/ventas/637ab8b010bcaa077c5a7805 HTTP/1.1
-
-###
-PUT http://localhost:3000/api/ventas/637ab8b010bcaa077c5a7805 HTTP/1.1
+PUT http://localhost:3000/Celulares/clientes/1014756932 HTTP/1.1
 Content-Type: application/json
 
 {
-    "tamaño": "pequeño",
-    "total": 30000,
-    "mensaje": "gracias por su compra vuelva pronto"
+    "Correo": "alejamar21@outlook.com",
+    "Telefono": 3112147589,
+    "Direccion": "Cra 4 C 2 Ac 32"
 }
 
 ###
-DELETE http://localhost:3000/api/ventas/637ab8b010bcaa077c5a7805 HTTP/1.1
+DELETE http://localhost:3000/Celulares/clientes/1014756932 HTTP/1.1
+
+
+
+
+###
+GET http://localhost:3000/Celulares/celulares HTTP/1.1
+
+###
+GET http://localhost:3000/Celulares/celulares/3 HTTP/1.1
+
+###
+POST http://localhost:3000/Celulares/celulares HTTP/1.1
+Content-Type: application/json
+
+{
+    {
+        "_id": 11,
+        "Nombre": "SAMSUNG GALAXY NOTE 9",
+        "Marca": "SAMSUNG",
+        "Modelo": "2022",
+        "Memoria": "6 GB",
+        "Almacenamiento": "128 GB",
+        "Red": "5G"
+    }
+}
+
+###
+PUT http://localhost:3000/Celulares/celulares/11 HTTP/1.1
+Content-Type: application/json
+
+{
+   "Modelo": "2023",
+    "Memoria": "8 GB",
+    "Almacenamiento": "256 GB"
+}
+
+###
+DELETE http://localhost:3000/Celulares/celulares/9 HTTP/1.1
+
+
+
+
+###
+GET http://localhost:3000/Celulares/ventas HTTP/1.1
+
+###
+GET http://localhost:3000/Celulares/ventas/84568 HTTP/1.1
+
+###
+POST http://localhost:3000/Celulares/ventas HTTP/1.1
+Content-Type: application/json
+
+{
+    {
+        "_id": 11838,
+        "_idCelular": 11,
+        "_idCliente": 1078961425,
+        "Fecha": "new Date(2022-12-05)",
+        "Detalle": "1 unidad vendida, color purpura lavanda",
+        "Precio": 2000000
+    }
+}
+
+###
+PUT http://localhost:3000/Celulares/ventas/11838 HTTP/1.1
+Content-Type: application/json
+
+{
+    "Detalle": "1 unidad vendida, color azul marino",
+    "Precio": 2525000
+}
+
+###
+DELETE http://localhost:3000/Celulares/ventas/61023 HTTP/1.1
