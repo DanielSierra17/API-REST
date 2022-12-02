@@ -1,63 +1,79 @@
-const Habitacion = require("../models/ventas");
+const Ventas = require('../models/ventas')
 
-exports.obtener = async (req, res) => {
+exports.get = async (req, res) => {
+
     try {
-        const habitaciones = await Habitacion.find();
-        res.status(200).json(habitaciones);
+        const ventas = await Ventas.find()
+        res.json(ventas)
     } catch (error) {
-        res.status(500).json(error)
+        res.json(error)
     }
 
 }
-exports.obtenerid = async (req, res) => {
+
+exports.getId = async (req, res) => {
+
     try {
-        const id = req.params.id;
-        const habitaciones = await Habitacion.findById(id);
-        res.status(200).json(habitaciones);
+        const ventas = await Ventas.findById(id)
+        res.json(ventas)
     } catch (error) {
-        res.status(500).json(error)
+        res.json(error)
     }
 
 }
+
 exports.add = async (req, res) => {
-    try {
 
-        //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
-        const newHabitacion = new Habitacion(req.body, req.file)
-        console.log(req.file);
-        if (req.file) {
-            const { filename } = req.file;
-            newHabitacion.setImg(filename);
-            console.log("si hay imagen")
+    try {
+        const { _idCelular, _idCliente, Fecha, Detalle, Precio } = req.body
+        console.log(_idCelular)
+
+        if (_idCelular && _idCliente && Fecha && Detalle && Precio) {
+
+            const nuevaVenta = new Ventas({ _idCelular, _idCliente, Fecha, Detalle, Precio })
+            await nuevaVenta.save()
+
+            res.json({ mensaje: "Venta registrado exitosamente", id: nuevaVenta._id })
         } else {
-            console.log("No hay imagen")
+            res.json({ mensaje: "Por favor relleno todos los campos" })
         }
-        await newHabitacion.save();
-        console.log(newHabitacion);
-        res.json({ msj: "Habitación registrada exitosamente", id: newHabitacion._id })
     } catch (error) {
-        res.status(500).json({ msj: "Error al registrar" + error })
+        res.json(error)
     }
 
 }
 
 exports.edit = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const newHabitacion = new Habitacion(req.body, req.file)
-        console.log(req.file);
 
-        if (req.file) {
-            const { filename } = req.file;
-            newHabitacion.setImg(filename);
-            console.log("si hay imagen")
+    try {
+        const idVentas = req.params.idVentas
+        const datos = req.body
+
+        if (idVentas && datos) {
+            await Ventas.findByIdAndUpdate(idVentas, datos)
+            res.json("Venta actualizada correctamente")
         } else {
-            console.log("No hay imagen")
+            res.json({ mensaje: "Por favor relleno todos los campos" })
         }
-        //console.log(`El id que se va a cambiar estado es ${id}`);
-        const cambioHabitacion = await Habitacion.findByIdAndUpdate(id, newHabitacion);
-        res.json({ msj: "Habitación actualizada exitosamente" })
+
     } catch (error) {
-        res.status(500).json(error);
+        res.json(error)
     }
+
+}
+
+exports.delete = async (req, res) => {
+
+    try {
+        const idVentas = req.params.idVentas
+
+        console.log(idVentas)
+        const drop = await Ventas.findByIdAndUpdate(idVentas, { _id })
+
+        res.status(200).json({ mensaje: "Venta eliminada correctamente" })
+    } catch (error) {
+        res.status(500).json(error)
+
+    }
+
 }

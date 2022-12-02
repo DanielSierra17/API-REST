@@ -1,63 +1,79 @@
-const Habitacion = require("../models/celulares");
+const Celulares = require('../models/celulares')
 
-exports.obtener = async (req, res) => {
+exports.get = async (req, res) => {
+
     try {
-        const habitaciones = await Habitacion.find();
-        res.status(200).json(habitaciones);
+        const celulares = await Celulares.find()
+        res.json(celulares)
     } catch (error) {
-        res.status(500).json(error)
+        res.json(error)
     }
 
 }
-exports.obtenerid = async (req, res) => {
+
+exports.getId = async (req, res) => {
+
     try {
-        const id = req.params.id;
-        const habitaciones = await Habitacion.findById(id);
-        res.status(200).json(habitaciones);
+        const celulares = await Celulares.findById(id)
+        res.json(celulares)
     } catch (error) {
-        res.status(500).json(error)
+        res.json(error)
     }
 
 }
+
 exports.add = async (req, res) => {
-    try {
 
-        //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
-        const newHabitacion = new Habitacion(req.body, req.file)
-        console.log(req.file);
-        if (req.file) {
-            const { filename } = req.file;
-            newHabitacion.setImg(filename);
-            console.log("si hay imagen")
+    try {
+        const { Nombre, Marca, Modelo, Memoria, Almacenamiento, Red } = req.body
+        console.log(Nombre)
+
+        if (Nombre && Marca && Modelo && Memoria && Almacenamiento && Red) {
+
+            const nuevoCelular = new Celulares({ Nombre, Marca, Modelo, Memoria, Almacenamiento, Red })
+            await nuevoCelular.save()
+
+            res.json({ mensaje: "Celular registrado exitosamente", id: nuevoCelular._id })
         } else {
-            console.log("No hay imagen")
+            res.json({ mensaje: "Por favor relleno todos los campos" })
         }
-        await newHabitacion.save();
-        console.log(newHabitacion);
-        res.json({ msj: "Habitación registrada exitosamente", id: newHabitacion._id })
     } catch (error) {
-        res.status(500).json({ msj: "Error al registrar" + error })
+        res.json(error)
     }
 
 }
 
 exports.edit = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const newHabitacion = new Habitacion(req.body, req.file)
-        console.log(req.file);
 
-        if (req.file) {
-            const { filename } = req.file;
-            newHabitacion.setImg(filename);
-            console.log("si hay imagen")
+    try {
+        const idCelulares = req.params.idCelulares
+        const datos = req.body
+
+        if (idCelulares && datos) {
+            await Celulares.findByIdAndUpdate(idCelulares, datos)
+            res.json("Celular actualizado correctamente")
         } else {
-            console.log("No hay imagen")
+            res.json({ mensaje: "Por favor relleno todos los campos" })
         }
-        //console.log(`El id que se va a cambiar estado es ${id}`);
-        const cambioHabitacion = await Habitacion.findByIdAndUpdate(id, newHabitacion);
-        res.json({ msj: "Habitación actualizada exitosamente" })
+
     } catch (error) {
-        res.status(500).json(error);
+        res.json(error)
     }
+
+}
+
+exports.delete = async (req, res) => {
+
+    try {
+        const idCelulares = req.params.idCelulares
+
+        console.log(idCelulares)
+        const drop = await Celulares.findByIdAndUpdate(idCelulares, { _id })
+
+        res.status(200).json({ mensaje: "Celular eliminado correctamente" })
+    } catch (error) {
+        res.status(500).json(error)
+
+    }
+
 }

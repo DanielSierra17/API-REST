@@ -1,102 +1,79 @@
-const User = require("../models/clientes");
-const jwt = require("jsonwebtoken");
+const Clientes = require('../models/clientes')
 
-exports.obtener = async (req, res) => {
+exports.get = async (req, res) => {
+
     try {
-        const users = await User.find();
-        res.status(200).json(users);
+        const clientes = await Clientes.find()
+        res.json(clientes)
     } catch (error) {
-        res.status(500).json(error)
+        res.json(error)
     }
 
 }
 
-exports.obtenerid = async (req, res) => {
+exports.getId = async (req, res) => {
+
     try {
-        const id = req.params.id;
-        const users = await User.findById(id);
-        res.status(200).json(users);
+        const clientes = await Clientes.findById(id)
+        res.json(clientes)
     } catch (error) {
-        res.status(500).json(error)
+        res.json(error)
     }
 
 }
 
 exports.add = async (req, res) => {
+
     try {
+        const { Tipo, Nombre, Apellido, Edad, Sexo, Correo, Telefono, Direccion } = req.body
+        console.log(Nombre)
 
-        //const { nombrehab, numerohab, capacidad, camas, descripcion, wifi, tv, banio, cajafuerte, nevera, valornoche, img, estado } = req.body;
-        const newUser = new User(req.body)
-        console.log(req.file);
+        if (Tipo && Nombre && Apellido && Edad && Sexo && Correo && Telefono && Direccion) {
 
-        if (req.file) {
-            const { filename } = req.file;
-            User.setImg(filename);
-            console.log("si hay imagen")
+            const nuevoCliente = new Clientes({ Tipo, Nombre, Apellido, Edad, Sexo, Correo, Telefono, Direccion })
+            await nuevoCliente.save()
+
+            res.json({ mensaje: "Cliente registrado exitosamente", id: nuevoCliente._id })
         } else {
-            console.log("No hay imagen")
+            res.json({ mensaje: "Por favor relleno todos los campos" })
         }
-        await newUser.save();
-        console.log(newUser);
-        //res.json({ msj: "Usuario registrado exitosamente", id: newUser._id })
     } catch (error) {
-        res.status(500).json({ msj: "Error al registrar" + error })
+        res.json(error)
     }
 
 }
 
 exports.edit = async (req, res) => {
-    try {
-        const id = req.params.id;
-        const newUser = new User(req.body, req.file)
-        console.log(req.file);
 
-        if (req.file) {
-            const { filename } = req.file;
-            newUser.setImg(filename);
-            console.log("si hay imagen")
+    try {
+        const idClientes = req.params.idClientes
+        const datos = req.body
+
+        if (idClientes && datos) {
+            await Clientes.findByIdAndUpdate(idClientes, datos)
+            res.json("Cliente actualizado correctamente")
         } else {
-            console.log("No hay imagen")
+            res.json({ mensaje: "Por favor relleno todos los campos" })
         }
-        const cambioUsuario = await User.findByIdAndUpdate(id, newUser);
-        res.json({ msj: "Huesped actualizado exitosamente" })
+
     } catch (error) {
-        res.status(500).json(error);
+        res.json(error)
     }
+
 }
 
-exports.login = async (req, res) => {
+exports.delete = async (req, res) => {
+
     try {
-        const { email, password } = req.body;
-        if (email && password) {
+        const idClientes = req.params.idClientes
 
-            const user = await User.findOne({ email });
-            if (!user) {
-                res.json({ token: null, msj: "usuario o contraseña incorrectos" });
-                console.log("usuario o contraseña incorrectos");
-            }
-            else {
+        console.log(idClientes)
+        const drop = await Clientes.findByIdAndUpdate(idClientes, { _id })
 
-                if (user.password == password) {
-
-                    const { _id, email } = user;
-
-                    const opt = {
-                        expiresIn: '1h'
-                    }
-                    const palabra = "hotelia-kuepa";
-                    const token = jwt.sign({ _id, email }, palabra, opt);
-                    console.log(token);
-                    res.json({ token });
-
-                } else {
-                    res.json({ token: null, msj: "usuario o contraseña incorrectos" });
-                }
-            }
-        } else {
-            res.json({ error: "Faltan datos por diligenciar" });
-        }
+        res.status(200).json({ mensaje: "Cliente eliminado correctamente" })
     } catch (error) {
-        res.status(500).json({ error: "Faltan datos por diligenciar" + error });
+        res.status(500).json(error)
+
     }
+
 }

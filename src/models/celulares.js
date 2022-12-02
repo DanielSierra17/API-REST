@@ -10,9 +10,4 @@ const celularesSchema = new Schema({
     _id: Number
 });
 
-celularesSchema.methods.setImg = function setImg(filename) {
-    this.img = `http://localhost:3000/public/${filename}`;
-    console.log("entró al método " + this.img);
-}
-
 module.exports = model("celulares", celularesSchema);

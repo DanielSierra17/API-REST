@@ -1,33 +1,17 @@
-const {Router}=require("express");
-const rutasCelulares=Router();
-const ctrCelulares=require("../controllers/celulares.controller");
-const autorizedHuesped=require("../auth/auth");
-const multer=require("multer");
-const fecha=Date.now();
+const { Router } = require("express");
+const rutasCelulares = Router();
+const ctrCelulares = require("../controllers/celulares.controller");
+const autorizedHuesped = require("../auth/auth.celulares");
+const multer = require("multer");
 
-const rutaStorage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './public/upload/');
-    },
-    filename:function(req,file,callback){
-        console.log(file);
-        callback(null,fecha+"_"+file.originalname);
-    }
-});
+rutasCelulares.get('/', ctrCelulares.get);
 
-const carga=multer({storage:rutaStorage});
+rutasCelulares.get('/:id', ctrCelulares.getId);
 
+rutasCelulares.post('/', ctrCelulares.add);
 
+rutasCelulares.put('/:id', ctrCelulares.edit);
 
-rutasCelulares.get('/', ctrCelulares.obtener);
+rutasCelulares.delete('/:id', ctrCelulares.delete);
 
-rutasCelulares.get('/:id', ctrCelulares.obtenerid);
-
-rutasCelulares.post('/', carga.single('img'),ctrCelulares.add);
-
-rutasCelulares.post('/login', ctrCelulares.login);
-  
-rutasCelulares.put('/:id',carga.single('img'),ctrCelulares.edit);
-
-
-module.exports=rutasCelulares;
+module.exports = rutasCelulares;

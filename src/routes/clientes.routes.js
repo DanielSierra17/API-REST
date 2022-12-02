@@ -1,31 +1,17 @@
-const {Router}=require("express");
-const rutasClientes=Router();
-const ctrClientes=require("../controllers/clientes.controller");
-const autorizedHuesped=require("../auth/auth");
-const multer=require("multer");
-const fecha=Date.now();
+// const { Router } = require("express");
+// const rutasClientes = Router();
+// const ctrClientes = require("../controllers/clientes.controller");
+// const autorizedHuesped = require("../auth/auth.clientes");
+// const multer = require("multer");
 
-const rutaStorage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './public/upload/');
-    },
-    filename:function(req,file,callback){
-        console.log(file);
-        callback(null,fecha+"_"+file.originalname);
-    }
-});
+// rutasClientes.get('/', ctrClientes.get);
 
-const carga=multer({storage:rutaStorage});
+// rutasClientes.get('/:id', ctrClientes.getId);
 
-rutasClientes.get('/', ctrClientes.obtener);
+// rutasClientes.post('/', ctrClientes.add);
 
-rutasClientes.get('/:id', ctrClientes.obtenerid);
+// rutasClientes.put('/:id', ctrClientes.edit);
 
-rutasClientes.post('/', carga.single('img'),ctrClientes.add);
+// rutasClientes.delete('/:id', ctrClientes.delete);
 
-rutasClientes.post('/login', ctrClientes.login);
-  
-rutasClientes.put('/:id',carga.single('img'),ctrClientes.edit);
-
-
-module.exports=rutasClientes;
+// module.exports = rutasClientes;
