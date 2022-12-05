@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/celular.png" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <link rel="icon" type="image/x-icon" href="img/celular.png" />
     <title>API CELULARES</title>
 </head>
 
@@ -16,32 +16,61 @@
     <h1>API CELULARES</h1>
 
     <div class="container">
-
-        <h1>RUTAS</h1>
-
-        <a href="/" class="btn btn-info">Pagina Principal</a>
-
-        <h1>CLIENTES</h1>
-
-        <a href="/clientes" class="btn btn-primary">GET</a>
-        <a href="" class="btn btn-success">POST</a>
-        <a href="" class="btn btn-warning">PUT</a>
-        <a href="" class="btn btn-danger">DELETE</a>
-
-        <h1>CELULARES</h1>
-
-        <a href="" class="btn btn-primary">GET</a>
-        <a href="" class="btn btn-success">POST</a>
-        <a href="" class="btn btn-warning">PUT</a>
-        <a href="" class="btn btn-danger">DELETE</a>
-
-        <h1>VENTAS</h1>
-
-        <a href="" class="btn btn-primary">GET</a>
-        <a href="" class="btn btn-success">POST</a>
-        <a href="" class="btn btn-warning">PUT</a>
-        <a href="" class="btn btn-danger">DELETE</a>
-
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="img/api.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">RUTAS</h5>
+                        <p>Bienvenido a la API-REST de Celulares aquí encontraras operaciones basicas con metodos HTTP
+                        </p>
+                        <a href="index.html" class="btn btn-outline-primary">PAGINA PRINCIPAL</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="img/clientes.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">CLIENTES</h5>
+                        <p>Bienvenido a la API-REST de Celulares aquí encontraras operaciones basicas con metodos HTTP
+                        </p>
+                        <a href="http://localhost:3000/api/clientes" class="btn btn-outline-primary">GET</a>
+                        <a href="http://localhost:3000/api/clientes/638d1d5fac46ef3930e020d3" class="btn btn-outline-info">GET ID</a>
+                        <a href="http://localhost:3000/api/clientes" class="btn btn-outline-success">POST</a>
+                        <a href="http://localhost:3000/api/clientes/638d1d5fac46ef3930e020db" class="btn btn-outline-warning">PUT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="img/celulares.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">CELULARES</h5>
+                        <p>Bienvenido a la API-REST de Celulares aquí encontraras operaciones basicas con metodos HTTP
+                        </p>
+                        <a href="http://localhost:3000/api/celulares" class="btn btn-outline-primary">GET</a>
+                        <a href="http://localhost:3000/api/celulares/638d1e40ac46ef3930e15f25" class="btn btn-outline-info">GET ID</a>
+                        <a href="http://localhost:3000/api/celulares" class="btn btn-outline-success">POST</a>
+                        <a href="http://localhost:3000/api/celulares/638d1e40ac46ef3930e15f27" class="btn btn-outline-warning">PUT</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="img/ventas.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">VENTAS</h5>
+                        <p>Bienvenido a la API-REST de Celulares aquí encontraras operaciones basicas con metodos HTTP
+                        </p>
+                        <a href="http://localhost:3000/api/ventas" class="btn btn-outline-primary">GET</a>
+                        <a href="http://localhost:3000/api/ventas/638d1de1ac46ef3930e0e319" class="btn btn-outline-info">GET ID</a>
+                        <a href="http://localhost:3000/api/ventas" class="btn btn-outline-success">POST</a>
+                        <a href="http://localhost:3000/api/ventas/638d1de1ac46ef3930e0e31b" class="btn btn-outline-warning">PUT</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

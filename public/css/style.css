@@ -5,9 +5,15 @@
 }
 
 body {
-    background-image: url(img/fondo.jpg);
+    background-image: url(../img/fondo.jpg);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+}
+
+h1 {
+    display: flex;
+    background-color: #FFFFFF;
+    justify-content: center;
 }
