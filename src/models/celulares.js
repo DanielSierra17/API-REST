@@ -1,13 +1,12 @@
 const { Schema, model } = require("mongoose");
 
 const celularesSchema = new Schema({
-    Red: String,
-    Almacenamiento: String,
-    Memoria: String,
-    Modelo: Number,
-    Marca: String,
     Nombre: String,
-    _id: Number
+    Marca: String,
+    Modelo: Number,
+    Memoria: String,
+    Almacenamiento: String,
+    Red: String
 });
 
 module.exports = model("celulares", celularesSchema);

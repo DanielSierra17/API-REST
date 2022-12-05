@@ -8,6 +8,10 @@ const rutasVentas = require('./routes/ventas.routes');
 const app = express()
 const port = process.env.PORT || 3000;
 
+app.set('view engine', 'ejs')
+
+app.use(express.static('public'))
+
 //Conexión a la BD
 conexionBD();
 

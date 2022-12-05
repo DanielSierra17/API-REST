@@ -14,6 +14,7 @@ exports.get = async (req, res) => {
 exports.getId = async (req, res) => {
 
     try {
+        const id = req.params.id
         const celulares = await Celulares.findById(id)
         res.json(celulares)
     } catch (error) {
@@ -33,7 +34,7 @@ exports.add = async (req, res) => {
             const nuevoCelular = new Celulares({ Nombre, Marca, Modelo, Memoria, Almacenamiento, Red })
             await nuevoCelular.save()
 
-            res.json({ mensaje: "Celular registrado exitosamente", id: nuevoCelular._id })
+            res.json({ mensaje: "Celular registrado exitosamente", id: nuevoCelular.id })
         } else {
             res.json({ mensaje: "Por favor relleno todos los campos" })
         }
@@ -58,22 +59,6 @@ exports.edit = async (req, res) => {
 
     } catch (error) {
         res.json(error)
-    }
-
-}
-
-exports.delete = async (req, res) => {
-
-    try {
-        const idCelulares = req.params.idCelulares
-
-        console.log(idCelulares)
-        const drop = await Celulares.findByIdAndUpdate(idCelulares, { _id })
-
-        res.status(200).json({ mensaje: "Celular eliminado correctamente" })
-    } catch (error) {
-        res.status(500).json(error)
-
     }
 
 }

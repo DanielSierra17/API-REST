@@ -14,6 +14,7 @@ exports.get = async (req, res) => {
 exports.getId = async (req, res) => {
 
     try {
+        const id = req.params.id
         const ventas = await Ventas.findById(id)
         res.json(ventas)
     } catch (error) {
@@ -33,7 +34,7 @@ exports.add = async (req, res) => {
             const nuevaVenta = new Ventas({ _idCelular, _idCliente, Fecha, Detalle, Precio })
             await nuevaVenta.save()
 
-            res.json({ mensaje: "Venta registrado exitosamente", id: nuevaVenta._id })
+            res.json({ mensaje: "Venta registrado exitosamente", id: nuevaVenta.id })
         } else {
             res.json({ mensaje: "Por favor relleno todos los campos" })
         }
@@ -58,22 +59,6 @@ exports.edit = async (req, res) => {
 
     } catch (error) {
         res.json(error)
-    }
-
-}
-
-exports.delete = async (req, res) => {
-
-    try {
-        const idVentas = req.params.idVentas
-
-        console.log(idVentas)
-        const drop = await Ventas.findByIdAndUpdate(idVentas, { _id })
-
-        res.status(200).json({ mensaje: "Venta eliminada correctamente" })
-    } catch (error) {
-        res.status(500).json(error)
-
     }
 
 }

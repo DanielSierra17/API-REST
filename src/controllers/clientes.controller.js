@@ -14,6 +14,7 @@ exports.get = async (req, res) => {
 exports.getId = async (req, res) => {
 
     try {
+        const id = req.params.id
         const clientes = await Clientes.findById(id)
         res.json(clientes)
     } catch (error) {
@@ -33,7 +34,7 @@ exports.add = async (req, res) => {
             const nuevoCliente = new Clientes({ Tipo, Nombre, Apellido, Edad, Sexo, Correo, Telefono, Direccion })
             await nuevoCliente.save()
 
-            res.json({ mensaje: "Cliente registrado exitosamente", id: nuevoCliente._id })
+            res.json({ mensaje: "Cliente registrado exitosamente", id: nuevoCliente.id })
         } else {
             res.json({ mensaje: "Por favor relleno todos los campos" })
         }
@@ -58,22 +59,6 @@ exports.edit = async (req, res) => {
 
     } catch (error) {
         res.json(error)
-    }
-
-}
-
-exports.delete = async (req, res) => {
-
-    try {
-        const idClientes = req.params.idClientes
-
-        console.log(idClientes)
-        const drop = await Clientes.findByIdAndUpdate(idClientes, { _id })
-
-        res.status(200).json({ mensaje: "Cliente eliminado correctamente" })
-    } catch (error) {
-        res.status(500).json(error)
-
     }
 
 }
